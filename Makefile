@@ -1,5 +1,7 @@
 curdir = `pwd`
 
+init: makedir build7
+
 makedir:
 	mkdir -p SRPMS/pkg
 
