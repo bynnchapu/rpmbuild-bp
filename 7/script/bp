@@ -1,0 +1,46 @@
+#!/bin/sh
+
+get_pkg_from_url() {
+	if wget -P /root/ ${1}
+	then
+		PKG_NAME=`rpm -qp /root/*.rpm`
+		echo "Download package ${PKG_NAME}: Success!"
+	else
+		echo "Download package: Failed..."
+		exit 1
+	fi
+}
+
+get_pkg_from_file() {
+	if cp /root/SRPMS/pkg/${1} /root/
+	then
+		PKG_NAME=`rpm -qp /root/*.rpm`
+		echo "Copying package ${PKG_NAME}: Success!"
+	else
+		echo "Copying package: Failed..."
+		exit 1
+	fi
+}
+
+check_file_style() {
+	if echo ${1} | grep -e "^http://" -e "^https://" > /dev/null 
+	then
+		get_pkg_from_url ${1}
+	else
+		get_pkg_from_file ${1}
+	fi
+}
+
+build_patch() {
+	rpm -ivh /root/*.rpm
+	rpmbuild -bp --nodeps /root/rpmbuild/SPECS/*.spec
+}
+
+copy_source_tree() {
+	PKG_NAME=`rpm -qp /root/*.rpm`
+	mv /root/rpmbuild /root/SRPMS/${PKG_NAME}
+}
+
+check_file_style ${1}
+build_patch
+copy_source_tree
