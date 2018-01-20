@@ -1,5 +1,8 @@
 curdir = `pwd`
 
+makedir:
+	mkdir -p SRPMS/pkg
+
 build7: 7/Dockerfile 7/script/bp
 	docker build -t rpmbuild-bp:7 ./7/
 
