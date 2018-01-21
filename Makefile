@@ -1,3 +1,4 @@
+.PHONY: bp7
 curdir = `pwd`
 
 init: makedir build7
@@ -11,3 +12,4 @@ build7: 7/Dockerfile 7/script/bp
 
 bp7:
 	docker run -v $(curdir)/SRPMS:/root/SRPMS -it rpmbuild-bp:7 bp $(PKG)
+
