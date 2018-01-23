@@ -1,4 +1,4 @@
-.PHONY: bp7
+.PHONY: bp7 bp6
 curdir = `pwd`
 
 init: makedir build7 build6
@@ -17,3 +17,5 @@ build6: 6/Dockerfile 6/script/bp
 bp7:
 	docker run -v $(curdir)/SRPMS:/root/SRPMS -it rpmbuild-bp:7 bp $(PKG)
 
+bp6:
+	docker run -v $(curdir)/SRPMS:/root/SRPMS -it rpmbuild-bp:6 bp $(PKG)
