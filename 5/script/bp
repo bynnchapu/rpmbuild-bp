@@ -1,0 +1,55 @@
+#!/bin/sh
+
+PKG_NAME=""
+PKG_PATH=${1}
+INPUT_UID=${2}
+INPUT_GID=${3}
+
+get_pkg_from_url() {
+	if wget -P /root/ ${PKG_PATH}
+	then
+		PKG_NAME=`rpm -qp /root/*.rpm`
+		echo "Download package ${PKG_NAME}: Success!"
+	else
+		echo "Download package: Failed..."
+		exit 1
+	fi
+}
+
+get_pkg_from_file() {
+	if cp /root/SRPMS/pkg/${PKG_PATH} /root/
+	then
+		PKG_NAME=`rpm -qp /root/*.rpm`
+		echo "Copying package ${PKG_NAME}: Success!"
+	else
+		echo "Copying package: Failed..."
+		exit 1
+	fi
+}
+
+check_file_style() {
+	if echo ${PKG_PATH} | grep -e "^http://" -e "^https://" > /dev/null
+	then
+		get_pkg_from_url ${PKG_PATH}
+	else
+		get_pkg_from_file ${PKG_PATH}
+	fi
+}
+
+build_patch() {
+	rpm -ivh /root/*.rpm
+	rpmbuild -bp --nodeps /usr/src/redhat/SPECS/*.spec
+}
+
+copy_source_tree() {
+	cp -rp /usr/src/redhat/ /root/SRPMS/${PKG_NAME}
+}
+
+change_owner() {
+	chown -R ${INPUT_UID}:${INPUT_GID} /root/SRPMS/${PKG_NAME}
+}
+
+check_file_style
+build_patch
+copy_source_tree
+change_owner

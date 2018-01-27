@@ -16,8 +16,15 @@ build6: 6/Dockerfile 6/script/bp
 	docker build -t rpmbuild-bp:6 ./6/
 	utils/maketimestamp.sh $@
 
+build5: 5/Dockerfile 5/script/bp
+	docker build -t rpmbuild-bp:5 ./5/
+	utils/maketimestamp.sh $@
+
 bp7:
 	docker run -v $(curdir)/SRPMS:/root/SRPMS -it rpmbuild-bp:7 bp $(PKG) $(uid) $(gid)
 
 bp6:
 	docker run -v $(curdir)/SRPMS:/root/SRPMS -it rpmbuild-bp:6 bp $(PKG) $(uid) $(gid)
+
+bp5:
+	docker run -v $(curdir)/SRPMS:/root/SRPMS -it rpmbuild-bp:5 bp $(PKG) $(uid) $(gid)
