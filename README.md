@@ -35,3 +35,8 @@ $ make bp6 PKG=nkf-2.0.8b-6.2.el6.src.rpm
 ```
 
 Source tree will be created into `SRPMS` directory.
+
+License
+-------
+
+Codes which is written in this repository are released under MIT License, see `LICENSE` file.
