@@ -28,7 +28,7 @@ get_pkg_from_file() {
 }
 
 check_file_style() {
-	if echo ${PKG_PATH} | grep -e "^http://" -e "^https://" > /dev/null
+	if echo ${PKG_PATH} | grep -e "^http://" -e "^https://" -e "^ftp://" > /dev/null
 	then
 		get_pkg_from_url ${PKG_PATH}
 	else
