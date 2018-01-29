@@ -3,7 +3,7 @@ curdir = `pwd`
 uid = `id -u`
 gid = `id -g`
 
-init: makedir build7 build6
+init: makedir build7 build6 build5
 
 makedir:
 	mkdir -p SRPMS/pkg
