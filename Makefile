@@ -1,4 +1,4 @@
-.PHONY: bp7 bp6
+.PHONY: bp7 bp6 bp5
 curdir = `pwd`
 uid = `id -u`
 gid = `id -g`
