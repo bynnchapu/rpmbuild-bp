@@ -11,11 +11,11 @@ How to use
 
 Run `make init` command. This make target will create `SRPMS`
 and `SRPMS/pkg` directories, build docker containers which are
-tagged `rpmbuild-bp:7` and `rpmbuild-bp:6`.
+tagged `rpmbuild-bp:7` and `rpmbuild-bp:6` `rpmbuild-bp5`.
 
 ### How to get source tree from SRPM package file
 
-Run following `make bp7` or `make bp6` command.
+Run following `make bp7` or `make bp6` `make bp5` command.
 
 ```
 $ make bp7 PKG=<URL of SRPM Package>
@@ -25,6 +25,11 @@ $ make bp7 PKG=<File name of SRPM Package in SRPMS/pkg>
 ```
 $ make bp6 PKG=<URL of SRPM Package>
 $ make bp6 PKG=<File name of SRPM Package in SRPMS/pkg>
+```
+
+```
+$ make bp5 PKG=<URL of SRPM Package>
+$ make bp5 PKG=<File name of SRPM Package in SRPMS/pkg>
 ```
 
 Example:
