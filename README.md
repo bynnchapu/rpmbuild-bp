@@ -41,6 +41,13 @@ $ make bp6 PKG=nkf-2.0.8b-6.2.el6.src.rpm
 
 Source tree will be created into `SRPMS` directory.
 
+HISTORY
+-------
+
+2018/11/03 v0.1:
+
+To modify for v0.2, tagged as v0.1.
+
 License
 -------
 
